@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="headTitle"></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/main.js"></script>
+<script src="assets/js/data.js"></script>
+</head>
+<body>
+	<div class="container" id="header"></div>
+	<div class="container" id="main">
+		<section class="row mt-3 mb-3" id="eventSection"></section>
+		<section class="row mt-3 mb-3">
+			<div class="d-flex align-items-center justify-content-between mb-2">
+				<h2>معرض الصور</h2>
+			</div>
+			<div class="row row-cols-1 row-cols-md-3 g-4" id="gallery"></div>
+		</section>
+
+		<section class="row mt-3 mb-3">
+			<h2>فعاليات ذات صلة</h2>
+			<div class="row row-cols-1 row-cols-md-3 g-4" id="related"></div>
+		</section>
+	</div>
+	<div class="container" id="backToTop"></div>
+	<div class="container" id="footer"></div>
+	<script>
+document.getElementById("header").innerHTML=header();
+document.getElementById("footer").innerHTML=footer();
+document.getElementById("backToTop").innerHTML=backToTop();
+$(".nav .nav-link").removeClass("active").removeAttr("aria-current");
+$(".nav .nav-link").eq(1).addClass("active").attr("aria-current", "page");
+const eventSection = document.getElementById("eventSection")
+const gallery = document.getElementById("gallery")
+const related = document.getElementById("related")
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+let index = 0
+for(i=0; i < data.events.length;i++)
+{
+	if(data.events[i].id == id)
+	{
+		index = i
+		break
+	}
+}
+
+let event = '<div class="container">\
+					<h2>'+data.events[index].title+'</h2>\
+					<div class="row">\
+						<img src="'+data.events[index].image+'" class="img-fluid img-thumbnail" onerror="this.onerror=null; this.src=\'data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;600&quot; height=&quot;400&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e9ecef&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot; font-size=&quot;24&quot; fill=&quot;%236c757d&quot;>لا يوجد صورة</text></svg>\';" alt="...">\
+					</div>\
+					<div class="row">\
+						<div class="col">\
+						'+checkStatus(data.events[index].date.start,data.events[index].date.end)+'\
+							<span class="badge bg-primary badge-category">'+data.events[index].category+'</span>\
+							<p>'+data.events[index].shortDescription+'</p>\
+							<p>📅 '+data.events[index].date.end+' → '+data.events[index].date.start+'</p>\
+							<p>📍 '+data.events[index].location.country+' ,'+data.events[index].location.city+' ,'+data.events[index].location.venue+'</p>\
+							<button class="btn btn-success">أضف للتقويم</button>\
+							<button class="btn btn-secondary">مشاركة</button>\
+						</div>\
+					</div>\
+			</div>'
+eventSection.innerHTML = event;
+
+
+if(data.events[index].images != null){
+	for (i = 0; i < data.events[index].images.length;i++)
+	{
+		image = '<div class="col-md-3">\
+					<div class="thumbnail">\
+						<a href="'+data.events[index].images[i]+'">\
+							<img src="'+data.events[index].images[i]+'" alt="Lights" style="width:100%">\
+						</a>\
+					</div>\
+				</div>'
+		gallery.innerHTML += image
+				
+	}		
+}
+else{
+	gallery.innerHTML = '<img src=\'data:image/svg+xml;utf8,<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="%23e9ecef"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="24" fill="%236c757d">لا يوجد صور</text></svg>\' class="img-fluid img-thumbnail" alt="...">'
+}	
+
+for ( i=0; i < data.events.length;i++)
+{
+	if(i != index && data.events[i].category ==  data.events[index].category)
+	{
+		let card='<div class="col">\
+				<div class="card h-100">\
+					<img src="'+data.events[i].image+'" class="card-img-top" onerror="this.onerror=null; this.src=\'data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;600&quot; height=&quot;400&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e9ecef&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot; font-size=&quot;24&quot; fill=&quot;%236c757d&quot;>لا يوجد صورة</text></svg>\';" alt="لا يوجد صورة">\
+					<div class="card-body">\
+						<h5 class="card-title">'+data.events[i].title+'</h5>\
+						<a class="card-text btn btn-primary w-100" href="./event.html?id='+data.events[i].id+'">عرض التفاصيل</a>\
+					</div>\
+				</div>\
+			</div>'
+		related.innerHTML += card
+	}
+}
+
+if(related.innerHTML == "")
+{
+	related.innerHTML += '<h3><span>لا يوجد فعاليات</span></h3>'	
+}
+const backToTopButton = document.getElementById("btn-back-to-top");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopButton.style.display = "inline-block";
+    } else {
+      backToTopButton.style.display = "none";
+    }
+  });
+
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+</body>
+</html>

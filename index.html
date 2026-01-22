@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title id="headTitle"></title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<link rel="stylesheet" href="assets/css/styles.css">
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+</head>
+<body>
+<div class="container" id="header"></div>
+<div class="container" id="main">
+	<div class="d-flex align-items-center justify-content-center">
+		<div class="card" style="width: 18rem;">
+			<div class="card-header text-center">
+				إعداد الطالب
+			</div>
+			<ul class="list-group list-group-flush ">
+				<li class="list-group-item">عبد الهادي بيطار (abdul_hadi_378675) </li>
+			</ul>
+		</div>
+	</div>
+	<section class="row mb-5">
+		<div class="col">
+			<h2>فعاليات بارزة هذا الأسبوع</h2>
+			<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+				<div class="carousel-indicators" id="sliderBtns">
+					
+				</div>
+				<div class="carousel-inner" id="sliderSlides">
+					
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+	</section>
+	<section class="row mb-5" id="categories">
+		<h2>تصنيفات</h1>
+	</section>
+	<section>
+		<h2>أحدث الفعاليات</h1>
+		<div class="card-group" id="latest"></div>
+	</section>
+	
+</div>
+<div class="container" id="backToTop">
+	
+</div>
+<div class="container" id="footer"></div>
+
+<script>
+document.getElementById("header").innerHTML=header();
+document.getElementById("footer").innerHTML=footer();
+document.getElementById("backToTop").innerHTML=backToTop();
+const sliderBtns = document.getElementById("sliderBtns")
+const sliderSlides = document.getElementById("sliderSlides")
+const categoriesSection = document.getElementById("categories")
+const latest = document.getElementById("latest")
+const thisWeekEvents = getThisWeekEvents() 
+for ( i=0; i < thisWeekEvents.length;i++)
+{
+	event=""
+	btn=""
+	image = thisWeekEvents[i].image != ""?thisWeekEvents[i].image:'data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;600&quot; height=&quot;400&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e9ecef&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot; font-size=&quot;24&quot; fill=&quot;%236c757d&quot;>لا يوجد صورة</text></svg>';
+	if(i==0){
+		event = '<div class="carousel-item active">\
+					<img src="'+image+'" class="d-block w-100" onerror="this.onerror=null; this.src='+image+' alt="'+thisWeekEvents[i].title+'">\
+					<div class="carousel-caption text-secondary d-none d-md-block">\
+						<h5>'+thisWeekEvents[i].title+'</h5>\
+						<p>'+thisWeekEvents[i].shortDescription+'</p>\
+					</div>\
+				</div>'
+		btn = '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>'
+			
+	}
+	else{
+		image = 
+		event = '<div class="carousel-item">\
+					<img src="'+image+'" class="d-block w-100" onerror="this.onerror=null; this.src='+image+' alt="'+data.events[i].title+'">\
+					<div class="carousel-caption text-secondary d-none d-md-block">\
+						<h5>'+thisWeekEvents[i].title+'</h5>\
+						<p>'+thisWeekEvents[i].shortDescription+'</p>\
+					</div>\
+				</div>'
+		btn = '<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="'+i+'" aria-label="Slide '+(i+1)+'"></button>'
+	}
+	sliderSlides.innerHTML += event
+	sliderBtns.innerHTML += btn
+}
+
+if(typeof categoriesList != "undefined"){
+	for(i=0; i < categoriesList.length; i++) {
+		if(i % 2 == 0)
+			categoriesSection.innerHTML += '<a href="./events.html?category='+categoriesList[i]+'" class="col badge bg-light  text-decoration-none text-reset"><h3 class="text-dark">'+categoriesList[i]+'</h3></a>'
+		else
+			categoriesSection.innerHTML += '<a href="./events.html?category='+categoriesList[i]+'" class="col badge bg-secondary text-decoration-none text-reset"><h3 class="text-light">'+categoriesList[i]+'</h3></a>'
+	}
+} else {
+	categoriesSection.innerHTML += '<h3><span>لا يوجد تصنيفات</span></h3>'
+}
+
+latestEventsList =  latestEvents()
+for(i = 0; i < latestEventsList.length; i++)
+{
+	latest.innerHTML += '<div class="card">\
+				<img src="'+latestEventsList[i].image+'" onerror="this.onerror=null; this.src=\'data:image/svg+xml;utf8,<?xml version=&quot;1.0&quot;?><svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;600&quot; height=&quot;400&quot;><rect width=&quot;100%&quot; height=&quot;100%&quot; fill=&quot;%23e9ecef&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; dominant-baseline=&quot;middle&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial&quot; font-size=&quot;24&quot; fill=&quot;%236c757d&quot;>لا يوجد صورة</text></svg>\';" class="card-img-top" alt="...">\
+				<div class="card-body">\
+				<h5 class="card-title">'+latestEventsList[i].title+'</h5>\
+				<p class="card-text">'+latestEventsList[i].shortDescription+'</p>\
+				</div>\
+				<div class="card-footer">\
+				<small class="text-muted">📅'+latestEventsList[i].date.start+'</small>\
+				</div>\
+			</div>'
+}
+
+
+const backToTopButton = document.getElementById("btn-back-to-top");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopButton.style.display = "inline-block";
+    } else {
+      backToTopButton.style.display = "none";
+    }
+  });
+
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+<script>
+  
+</script>
+
+</body>
+
+</html>
