@@ -47,7 +47,7 @@ function footer()
 							</ul>\
 						</div>\
 					<div class="col-12 col-md-4">\
-						<h5 class="mb-3">Social</h5>\
+						<h5 class="mb-3">تواصل اجتماعي</h5>\
 						<ul class="list-unstyled mb-0">\
 							<li class="mb-2"><a class="text-decoration-none" href="#" target="_blank" rel="noopener">Facebook</a></li>\
 							<li class="mb-2"><a class="text-decoration-none" href="#" target="_blank" rel="noopener">Instagram</a></li>\
@@ -56,11 +56,10 @@ function footer()
 						</ul>\
 					</div>\
 					<div class="col-12 col-md-4">\
-						<h5 class="mb-3">Legal</h5>\
+						<h5 class="mb-3">قانونيّات</h5>\
 						<ul class="list-unstyled mb-3">\
-							<li class="mb-2"><a class="text-decoration-none" href="/privacy">Privacy Policy</a></li>\
-							<li class="mb-2"><a class="text-decoration-none" href="/terms">Terms of Service</a></li>\
-							<li><a class="text-decoration-none" href="/cookies">Cookie Policy</a></li>\
+							<li class="mb-2"><a class="text-decoration-none" href="#">سياسة الخصوصية</a></li>\
+							<li class="mb-2"><a class="text-decoration-none" href="#">شروط الخدمة</a></li>\
 						</ul>\
 					</div>\
 				</div>\
