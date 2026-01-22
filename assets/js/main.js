@@ -49,10 +49,10 @@ function footer()
 					<div class="col-12 col-md-4">\
 						<h5 class="mb-3">Social</h5>\
 						<ul class="list-unstyled mb-0">\
-							<li class="mb-2"><a class="text-decoration-none" href="https://facebook.com/yourpage" target="_blank" rel="noopener">Facebook</a></li>\
-							<li class="mb-2"><a class="text-decoration-none" href="https://instagram.com/yourpage" target="_blank" rel="noopener">Instagram</a></li>\
-							<li class="mb-2"><a class="text-decoration-none" href="https://x.com/yourpage" target="_blank" rel="noopener">X (Twitter)</a></li>\
-							<li><a class="text-decoration-none" href="https://linkedin.com/company/yourpage" target="_blank" rel="noopener">LinkedIn</a></li>\
+							<li class="mb-2"><a class="text-decoration-none" href="#" target="_blank" rel="noopener">Facebook</a></li>\
+							<li class="mb-2"><a class="text-decoration-none" href="#" target="_blank" rel="noopener">Instagram</a></li>\
+							<li class="mb-2"><a class="text-decoration-none" href="#" target="_blank" rel="noopener">X (Twitter)</a></li>\
+							<li><a class="text-decoration-none" href="#" target="_blank" rel="noopener">LinkedIn</a></li>\
 						</ul>\
 					</div>\
 					<div class="col-12 col-md-4">\
