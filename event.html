@@ -62,6 +62,7 @@ let event = '<div class="container">\
 							<p>'+data.events[index].shortDescription+'</p>\
 							<p>📅 '+data.events[index].date.end+' → '+data.events[index].date.start+'</p>\
 							<p>📍 '+data.events[index].location.country+' ,'+data.events[index].location.city+' ,'+data.events[index].location.venue+'</p>\
+							<p>'+data.events[index].fullDescription+'</p>\
 							<button class="btn btn-success">أضف للتقويم</button>\
 							<button class="btn btn-secondary">مشاركة</button>\
 						</div>\
@@ -125,3 +126,4 @@ const backToTopButton = document.getElementById("btn-back-to-top");
 </script>
 </body>
 </html>
+
